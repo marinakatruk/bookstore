@@ -1,0 +1,65 @@
+.header {
+    background-color: #ffffff;
+    width: 1000px;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu {
+    list-style: none;
+    text-transform: uppercase;
+    width: 600px;
+    font: {
+        family: 'Roboto';
+        weight: bold;
+        size: 14px;
+    };
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.cartIcon {
+    width: 20px;
+    height: 20px;
+    background: {
+        image: url(../../img/353439-basket.png);
+        repeat: no-repeat;
+    }
+    background-size: cover;
+}
+
+.menuItem {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.1s linear;
+}
+
+.menuItem:hover {
+    background-color: #000000;
+    color: #ffffff;
+    .cartIcon {
+        background-image: url(../../img/353439-basket-white.png)
+    }
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+    display: inherit;
+    align-items: inherit;
+    width: 100%;
+    height: 100%;
+    padding: 0 15px 0 15px;
+}
+
+.active {
+    background-color: #000000;
+    color: #ffffff;
+}
+
