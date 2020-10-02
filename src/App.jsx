@@ -5,8 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import { Home } from './pages/home/Home.jsx'
-import { Basket } from './pages/Cart/Basket'
-import { New } from './pages/New.jsx'
+import { Cart } from './pages/Cart/Cart'
+import { New } from './pages/newBook/New.jsx'
 
 import { Logo } from './components/logo/logo.jsx'
 import { Footer } from './components/footer/footer.jsx'
@@ -20,7 +20,7 @@ function App() {
         <Logo/>
         <Switch>
           <Route exact path={'/'} component={Home}/>
-          <Route path={'/basket'} component={Basket}/>
+          <Route path={'/cart'} component={Cart}/>
           <Route path={'/new'} component={New}/>
         </Switch>
         <Footer/>

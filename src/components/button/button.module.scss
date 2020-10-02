@@ -1,0 +1,21 @@
+.button {
+    background-color: #333333;
+    color: #ffffff;
+    border-radius: 5px;
+    transition: all 0.1s linear;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    font: {
+        family: 'Roboto', sans-serif;
+        weight: 700;
+        size: 15px;
+    }
+    transition: all 0.1s linear;
+
+}
+
+.button:hover {
+    background-color: #eeeeee;  
+    color: #333333;
+}
