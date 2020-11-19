@@ -4,6 +4,7 @@
     align-items: center;
     width: 80%;
     margin-bottom: 40px;
+    padding-top: 40px;
 }
 
 .item {
@@ -47,4 +48,9 @@
 .submit:hover {
     background-color: #eeeeee;  
     color: #333333;
+}
+
+.submit:disabled {
+    background-color: #C0C0C0;
+    color: #808080;
 }

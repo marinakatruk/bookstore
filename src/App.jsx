@@ -11,9 +11,22 @@ import { New } from './pages/newBook/New.jsx'
 import { Logo } from './components/logo/logo.jsx'
 import { Footer } from './components/footer/footer.jsx'
 
+import { useState, useEffect } from 'react'
+
 import styles from './App.module.scss'
 
 function App() {
+  const [books, setBooks] = useState([]);
+
+  const handleSubmit = (book) => {
+    setBooks([...books, book]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('books', JSON.stringify(books));
+  });
+
+
   return (
     <Router>
       <div className={styles.container}>
@@ -21,7 +34,7 @@ function App() {
         <Switch>
           <Route exact path={'/'} component={Home}/>
           <Route path={'/cart'} component={Cart}/>
-          <Route path={'/new'} component={New}/>
+          <Route path={'/new'}><New handleSubmit={handleSubmit}/></Route>
         </Switch>
         <Footer/>
       </div>

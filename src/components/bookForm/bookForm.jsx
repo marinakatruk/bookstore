@@ -1,104 +1,130 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { FormErrors } from '../../components/formErrors/formErrors'
 
 import styles from './bookForm.module.scss'
 
-export const BookForm = () => {
-    const [books, setBooks] = useState([]);
+export const BookForm = (props) => {
 
-    const [name, setName] = useState("");
-    const [autor, setAutor] = useState("");
-    const [year, setYear] = useState("");
-    const [price, setPrice] = useState("");
-    const [image, setImage] = useState("");
-
-    const createBook = (n, a, y, p, i) => {
-        const obj = {};
-        obj.name = n;
-        obj.autor = a;
-        obj.year = y;
-        obj.price = p;
-        obj.image = i;
-        return obj;
-    }
-
-    const addBook = (object) => {
-        const newBooks = [...books, { object }];
-        setBooks(newBooks);
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const newBook = createBook(name, autor, year, price, image);
-        addBook(newBook);
-        setName("");
-        setAutor("");
-        setYear("");
-        setPrice("");
-        setImage("");
-    }
-
-    useEffect(() => {
-        localStorage.setItem('books', JSON.stringify(books));
+    const [book, setBook] = useState({
+        name: '',
+        autor: '',
+        year: '',
+        price: '',
+        image: ''
     });
-       
+
+    const [formValid, setFormValid] = useState({
+        formErrors: {name: '', autor: '', year: '', price: '', image: ''},
+        isValid: false
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+
+        const newBook = Object.assign({}, book);
+        newBook[name] = value;
+
+        validateField(name, value);
+        setBook(newBook);
+    };
+
+    const validateField = (fieldName, value) => {
+        let fieldValidationErrors = formValid.formErrors;
+        let isValid = formValid.isValid;
+        
+        isValid = value.length > 0;
+        fieldValidationErrors[fieldName] = isValid ? '' : ' cannot be blank';
+
+        setFormValid({formErrors: fieldValidationErrors, isValid: isValid})
+    }
+
+    const submitForm = () => {
+        props.handleSubmit(book);
+        setBook({
+            name: '',
+            autor: '',
+            year: '',
+            price: '',
+            image: ''
+        })
+    };
+
+    const { formErrors, isValid } = formValid;
+
+    const { name, autor, year, price, image } = book;
+
+    const { container, item, input, submit } = styles;
 
     return (
+
         <form 
-            className={styles.container}
-            onSubmit={handleSubmit}
+            className={container}
             >
-            <label className={styles.item}>
+            <div>
+                <FormErrors formErrors={formErrors}/>
+            </div>
+            <label className={item}>
                 Name of the book: 
                 <input
-                    className={styles.input}
+                    className={input}
+                    style={{borderColor: formErrors.name.length === 0 ? '' : "red"}}
                     type="text"
                     name="name"
+                    id="name"
                     value={name}
-                    onChange={event => setName(event.target.value)}
+                    onChange={handleChange}
                 />
             </label>
-            <label className={styles.item}>
+            <label className={item}>
                 Autor: 
                 <input
-                    className={styles.input}
+                    className={input}
+                    style={{borderColor: formErrors.autor.length === 0 ? '' : "red"}}
                     type="text"
                     name="autor"
+                    id="autor"
                     value={autor} 
-                    onChange={event => setAutor(event.target.value)}
+                    onChange={handleChange}
                 />
             </label>
-            <label className={styles.item}>
+            <label className={item}>
                 Release year: 
                 <input
-                    className={styles.input}
+                    className={input}
+                    style={{borderColor: formErrors.year.length === 0 ? '' : "red"}}
                     type="text"
                     name="year"
+                    id="year"
                     value={year}
-                    onChange={event => setYear(event.target.value)} 
+                    onChange={handleChange} 
                 />
             </label>
-            <label className={styles.item}>
+            <label className={item}>
                 Price:
                 <input
-                    className={styles.input}
+                    className={input}
+                    style={{borderColor: formErrors.price.length === 0 ? '' : "red"}}
                     type="text"
                     name="price"
+                    id="price"
                     value={price}
-                    onChange={event => setPrice(event.target.value)}
+                    onChange={handleChange}
                 />
             </label>
-            <label className={styles.item}>
+            <label className={item}>
                 Add an image:
                 <input
-                    className={styles.input}
+                    className={input}
+                    style={{borderColor: formErrors.image.length === 0 ? '' : "red"}}
                     type="text"
                     name="image"
+                    id="image"
                     value={image}
-                    onChange={event => setImage(event.target.value)}
+                    onChange={handleChange}
                 />
             </label>
-            <input className={styles.submit} type="submit" value="Create a book"/>
+            <input className={submit} type="button" disabled={!isValid} value="Create a book" onClick={submitForm}/>
         </form>
     )
 }
