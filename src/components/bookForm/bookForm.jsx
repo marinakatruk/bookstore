@@ -15,27 +15,120 @@ export const BookForm = (props) => {
     });
 
     const [formValid, setFormValid] = useState({
-        formErrors: {name: '', autor: '', year: '', price: '', image: ''},
+        formErrors: { name: '', autor: '', year: '', price: '', image: '' },
+        nameValid: false,
+        autorValid: false,
+        yearValid: false,
+        priceValid: false,
+        imageValid: false,
         isValid: false
     });
 
     const handleChange = (event) => {
-        const { name, value } = event.target;
+        let newBook;
+        if (event.target.files === null) {
+            const { name, value } = event.target;
 
-        const newBook = Object.assign({}, book);
-        newBook[name] = value;
+            newBook = Object.assign({}, book);
+            newBook[name] = value;
+            validateField(name, value);
+            setBook(newBook);
+        } else {
+            
+            if (event.target.files.length > 0) {
+                const imageFile = event.target.files[0];
+                console.log(imageFile);
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                    handleFileError(reader.error);
+                    const result = reader.result;
+                    newBook = Object.assign({}, book);
+                    newBook.image = result;
+                    setBook(newBook);
+                }
+                reader.readAsDataURL(imageFile);
 
-        validateField(name, value);
-        setBook(newBook);
+            } else {
+                validateFileField(event.target.files)
+            }
+  
+        }
+        
+    };
+
+    const validateFileField = (files) => {
+        let fieldValidationErrors = formValid.formErrors;
+        let imageValid = formValid.imageValid;
+
+        imageValid = files.length > 0;
+        fieldValidationErrors.image = imageValid ? '' : ' no file selected';
+
+        let newFormValid = Object.assign({}, formValid);
+        newFormValid.formErrors = fieldValidationErrors;
+        newFormValid.imageValid = imageValid;
+
+        setFormValid(newFormValid);
+
+        validateForm()
+        
     };
 
     const validateField = (fieldName, value) => {
         let fieldValidationErrors = formValid.formErrors;
+        let nameValid = formValid.nameValid;
+        let autorValid = formValid.autorValid;
+        let yearValid = formValid.yearValid;
+        let priceValid = formValid.yearValid;
+        let imageValid = formValid.imageValid;
+       
         let isValid = formValid.isValid;
-        
-        isValid = value.length > 0;
-        fieldValidationErrors[fieldName] = isValid ? '' : ' cannot be blank';
 
+        switch(fieldName) {
+            case 'name':
+                nameValid = value.length > 0;
+                fieldValidationErrors.name = nameValid ? '' : ' cannot be blank';
+                break;
+            case 'autor':
+                autorValid = value.length > 0;
+                fieldValidationErrors.autor = autorValid ? '' : ' cannot be blank';
+                break;
+            case 'year':
+                yearValid = value.length > 0 && value.match(/^\d+$/ );
+                fieldValidationErrors.year = yearValid ? '' : ' must contain only numbers';
+                break;
+            case 'price':
+                priceValid = value.length > 0 && value.match(/^\d+$/ );
+                fieldValidationErrors.price = priceValid ? '' : ' must contain only numbers';
+                break;
+            default:
+                break;
+        }
+        setFormValid({formErrors: fieldValidationErrors,
+            nameValid: nameValid,
+            autorValid: autorValid,
+            yearValid: yearValid,
+            priceValid: priceValid,
+            imageValid: imageValid,
+            isValid: isValid});
+
+        console.log(formValid);
+        validateForm();
+    }
+
+    function validateForm() {
+        let isValid = formValid.nameValid && formValid.autorValid && formValid.yearValid &&
+        formValid.priceValid && formValid.imageValid;
+        let newFormValid = Object.assign({}, formValid);
+        newFormValid.isValid = isValid;
+        setFormValid(newFormValid);
+    }
+
+    const handleFileError = (error) => {
+        let fieldValidationErrors = formValid.formErrors;
+        let isValid = formValid.isValid;
+
+        isValid = !error;
+        fieldValidationErrors.image = isValid ? '' : ' file upload error';
         setFormValid({formErrors: fieldValidationErrors, isValid: isValid})
     }
 
@@ -51,8 +144,6 @@ export const BookForm = (props) => {
     };
 
     const { formErrors, isValid } = formValid;
-
-    const { name, autor, year, price, image } = book;
 
     const { container, item, input, submit } = styles;
 
@@ -72,7 +163,7 @@ export const BookForm = (props) => {
                     type="text"
                     name="name"
                     id="name"
-                    value={name}
+                    value={book.name}
                     onChange={handleChange}
                 />
             </label>
@@ -84,7 +175,7 @@ export const BookForm = (props) => {
                     type="text"
                     name="autor"
                     id="autor"
-                    value={autor} 
+                    value={book.autor} 
                     onChange={handleChange}
                 />
             </label>
@@ -96,7 +187,7 @@ export const BookForm = (props) => {
                     type="text"
                     name="year"
                     id="year"
-                    value={year}
+                    value={book.year}
                     onChange={handleChange} 
                 />
             </label>
@@ -108,7 +199,7 @@ export const BookForm = (props) => {
                     type="text"
                     name="price"
                     id="price"
-                    value={price}
+                    value={book.price}
                     onChange={handleChange}
                 />
             </label>
@@ -117,10 +208,10 @@ export const BookForm = (props) => {
                 <input
                     className={input}
                     style={{borderColor: formErrors.image.length === 0 ? '' : "red"}}
-                    type="text"
+                    type="file"
+                    accept="image/*"
                     name="image"
                     id="image"
-                    value={image}
                     onChange={handleChange}
                 />
             </label>
