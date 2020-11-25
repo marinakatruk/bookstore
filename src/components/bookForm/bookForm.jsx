@@ -24,6 +24,8 @@ export const BookForm = (props) => {
         isValid: false
     });
 
+    const [fileStatus, setFileStatus] = useState('Select file...');
+
     const handleChange = (event) => {
         let newBook;
         if (event.target.files === null) {
@@ -34,7 +36,7 @@ export const BookForm = (props) => {
             validateField(name, value);
             setBook(newBook);
         } else {
-            
+            console.log(event.target.value);
             if (event.target.files.length > 0) {
                 const imageFile = event.target.files[0];
                 console.log(imageFile);
@@ -45,9 +47,12 @@ export const BookForm = (props) => {
                     newBook = Object.assign({}, book);
                     newBook.image = result;
                     setBook(newBook);
+                    setFileStatus(imageFile.name);
                 }
                 reader.readAsDataURL(imageFile);
-
+                validateFileField(event.target.files);
+                event.target.value = null;
+            
             } else {
                 validateFileField(event.target.files)
             }
@@ -63,13 +68,13 @@ export const BookForm = (props) => {
         imageValid = files.length > 0;
         fieldValidationErrors.image = imageValid ? '' : ' no file selected';
 
-        let newFormValid = Object.assign({}, formValid);
+        let newFormValid = formValid;
         newFormValid.formErrors = fieldValidationErrors;
         newFormValid.imageValid = imageValid;
 
         setFormValid(newFormValid);
 
-        validateForm()
+        validateForm();
         
     };
 
@@ -93,43 +98,68 @@ export const BookForm = (props) => {
                 fieldValidationErrors.autor = autorValid ? '' : ' cannot be blank';
                 break;
             case 'year':
-                yearValid = value.length > 0 && value.match(/^\d+$/ );
+                yearValid = value.length > 0 && value.match(/^\d+$/) !== null;
                 fieldValidationErrors.year = yearValid ? '' : ' must contain only numbers';
                 break;
             case 'price':
-                priceValid = value.length > 0 && value.match(/^\d+$/ );
+                priceValid = value.length > 0 && value.match(/^\d+$/) !== null;
                 fieldValidationErrors.price = priceValid ? '' : ' must contain only numbers';
                 break;
             default:
                 break;
         }
-        setFormValid({formErrors: fieldValidationErrors,
-            nameValid: nameValid,
-            autorValid: autorValid,
-            yearValid: yearValid,
-            priceValid: priceValid,
-            imageValid: imageValid,
-            isValid: isValid});
+
+        console.log(nameValid);
+        console.log(autorValid);
+        console.log(yearValid);
+        console.log(priceValid);
+
+        let newFormValid = formValid;
+
+        newFormValid.formErrors = fieldValidationErrors;
+        newFormValid.nameValid = nameValid;
+        newFormValid.autorValid = autorValid;
+        newFormValid.yearValid = yearValid;
+        newFormValid.priceValid = priceValid;
+        newFormValid.imageValid = imageValid;
+        newFormValid.isValid = isValid;
+
+        setFormValid(newFormValid);
+
+        // setFormValid({formErrors: fieldValidationErrors,
+        //     nameValid: nameValid,
+        //     autorValid: autorValid,
+        //     yearValid: yearValid,
+        //     priceValid: priceValid,
+        //     imageValid: imageValid,
+        //     isValid: isValid
+        // });
 
         console.log(formValid);
         validateForm();
     }
 
     function validateForm() {
-        let isValid = formValid.nameValid && formValid.autorValid && formValid.yearValid &&
+        const newFormValid = formValid;
+        newFormValid.isValid = formValid.nameValid && formValid.autorValid && formValid.yearValid &&
         formValid.priceValid && formValid.imageValid;
-        let newFormValid = Object.assign({}, formValid);
-        newFormValid.isValid = isValid;
+        
         setFormValid(newFormValid);
     }
 
     const handleFileError = (error) => {
         let fieldValidationErrors = formValid.formErrors;
-        let isValid = formValid.isValid;
+        let imageValid = formValid.imageValid;
 
-        isValid = !error;
-        fieldValidationErrors.image = isValid ? '' : ' file upload error';
-        setFormValid({formErrors: fieldValidationErrors, isValid: isValid})
+        imageValid = !error;
+        fieldValidationErrors.image = imageValid ? '' : ' file upload error';
+
+        let newFormValid = Object.assign({}, formValid);
+        newFormValid.formErrors = fieldValidationErrors;
+        newFormValid.imageValid = imageValid;
+
+        setFormValid(newFormValid);
+        
     }
 
     const submitForm = () => {
@@ -141,18 +171,19 @@ export const BookForm = (props) => {
             price: '',
             image: ''
         })
+        setFileStatus('Select file...');
     };
 
     const { formErrors, isValid } = formValid;
 
-    const { container, item, input, submit } = styles;
+    const { container, item, input, submit, errors, fileInput, fileField } = styles;
 
     return (
 
         <form 
             className={container}
             >
-            <div>
+            <div className={errors}>
                 <FormErrors formErrors={formErrors}/>
             </div>
             <label className={item}>
@@ -206,7 +237,7 @@ export const BookForm = (props) => {
             <label className={item}>
                 Add an image:
                 <input
-                    className={input}
+                    className={fileInput}
                     style={{borderColor: formErrors.image.length === 0 ? '' : "red"}}
                     type="file"
                     accept="image/*"
@@ -214,6 +245,7 @@ export const BookForm = (props) => {
                     id="image"
                     onChange={handleChange}
                 />
+                <div className={fileField}>{fileStatus}</div>
             </label>
             <input className={submit} type="button" disabled={!isValid} value="Create a book" onClick={submitForm}/>
         </form>

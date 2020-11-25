@@ -9,8 +9,13 @@ export const Catalog = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const result = localStorage.getItem('books') ? JSON.parse(localStorage.getItem('books')) :
-        books;
+        let result;
+        const data = JSON.parse(localStorage.getItem('books'));
+        if (data && data.length > 0) {
+            result = data;
+        } else {
+            result = books;
+        }
 
         setData(result);
     }, []);
