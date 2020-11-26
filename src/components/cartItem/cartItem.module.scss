@@ -1,0 +1,61 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #C0C0C0;
+}
+
+.book {
+    display: flex;
+    align-items: center;
+
+}
+
+.image {
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.info {
+    margin-left: 20px;
+
+    h3 {
+        margin: 0px;
+        font-size: 16px;
+    }
+
+    h4 {
+        margin: 0px;
+        font-size: 14px;
+    }
+
+    p {
+        margin: 5px 0px;
+        font-size: 14px;
+    }
+}
+
+.priceBlock {
+    display: flex;
+
+
+    h5 {
+        margin: 0px;
+        font-size: 16px;
+    }
+
+    span {
+        margin-left: 150px;
+    }
+}
+
+.deleteBlock {
+    button {
+        border: none;
+        background-color: #f7f6fb;
+        color: red;
+        font-weight: 700;
+    }
+}
+

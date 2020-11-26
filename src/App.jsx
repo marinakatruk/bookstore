@@ -17,6 +17,15 @@ import styles from './App.module.scss'
 
 function App() {
   const [books, setBooks] = useState([]);
+  const [cartItems, setCartItems] = useState([{
+      name: 'Becoming',
+      autor: 'Michelle Obama',
+      year: '2018',
+      price: '28',
+      image: '/img/becoming.png'
+    }]);
+    
+  const [counter, setCounter] = useState(0);
 
   const handleSubmit = (book) => {
     setBooks([...books, book]);
@@ -33,7 +42,7 @@ function App() {
         <Logo/>
         <Switch>
           <Route exact path={'/'} component={Home}/>
-          <Route path={'/cart'} component={Cart}/>
+          <Route path={'/cart'}><Cart cartItems={cartItems}/></Route>
           <Route path={'/new'}><New handleSubmit={handleSubmit}/></Route>
         </Switch>
         <Footer/>
