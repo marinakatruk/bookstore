@@ -4,7 +4,19 @@ import { Button } from '../button/button'
 import styles from './book.module.scss'
 
 
-export const Book = ({ name, autor, year, price, image }) => {
+export const Book = ({ name, autor, year, price, image, AddItemToCart }) => {
+
+    const handleClick = () => {
+        let item = {};
+        item.name = name;
+        item.autor = autor;
+        item.year = year;
+        item.price = price;
+        item.image = image;
+
+        AddItemToCart(item);
+        
+    }
     
     return (
         <div className={styles.container}>
@@ -18,7 +30,7 @@ export const Book = ({ name, autor, year, price, image }) => {
             </div>
             <div className={styles.priceBlock}>
                 <h5>${price}</h5>
-                <Button text="Buy" className={styles.but}/>
+                <Button text="Buy" className={styles.but} onClick={handleClick}/>
             </div>
             
         </div>

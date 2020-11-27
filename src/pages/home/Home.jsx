@@ -7,12 +7,12 @@ import styles from './home.module.scss'
 
 
 
-export const Home = () => {
+export const Home = ({ AddItemToCart, counter }) => {
     return (
        <div className={styles.container}>
-           <Header/>
+           <Header counter={counter}/>
            <div className={styles.main}>
-                <Catalog/>
+                <Catalog AddItemToCart={AddItemToCart}/>
                 <Request/>
            </div>
        </div>

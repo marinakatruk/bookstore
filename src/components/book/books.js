@@ -17,7 +17,7 @@ const books = [
                 name: 'Sapiens: A Brief History of Humankind',
                 autor: 'Yuval Noah Harari',
                 year: '2015',
-                price: '23.5',
+                price: '24',
                 image: '/img/sapiens.png'
         },
         {
@@ -73,7 +73,7 @@ const books = [
                 name: 'The Bridges Of Madison County',
                 autor: 'Robert James Waller',
                 year: '2000',
-                price: '18.9',
+                price: '18',
                 image: '/img/madison.png'
         },
         {

@@ -4,7 +4,7 @@ import books from '../book/books'
 
 import styles from './catalog.module.scss'
 
-export const Catalog = () => {
+export const Catalog = ({ AddItemToCart }) => {
 
     const [data, setData] = useState([]);
 
@@ -28,6 +28,7 @@ export const Catalog = () => {
                 year={book.year}
                 price={book.price}
                 image={book.image}
+                AddItemToCart={AddItemToCart}
             />          
         )
     })

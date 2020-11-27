@@ -5,7 +5,7 @@ import { Form } from '../form/form'
 
 import styles from './header.module.scss'
 
-export const Header = () => {
+export const Header = ({ counter }) => {
     
     return (
         <div className={styles.header}>
@@ -19,7 +19,7 @@ export const Header = () => {
                 <li className={styles.menuItem}>
                     <NavLink to='/cart' className={styles.link} activeClassName={styles.active}>
                         <div className={styles.cartIcon}></div>
-                        <span className={styles.counter}>0</span>
+                        <span className={styles.counter}>{counter}</span>
                     </NavLink>
                 </li>
             </ul>
