@@ -1,11 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { Form } from '../form/form'
+import { SearchBar } from '../search/search'
 
 
 import styles from './header.module.scss'
 
-export const Header = ({ counter }) => {
+export const Header = ({ counter, data, term, updateData }) => {
     
     return (
         <div className={styles.header}>
@@ -14,7 +14,7 @@ export const Header = ({ counter }) => {
                     <NavLink to= '/' className={styles.link} activeClassName={styles.active} exact>Home</NavLink>
                 </li>
                 <li>
-                    <Form/>
+                    <SearchBar data={data} term={term} updateData={updateData}/>
                 </li>
                 <li className={styles.menuItem}>
                     <NavLink to='/cart' className={styles.link} activeClassName={styles.active}>

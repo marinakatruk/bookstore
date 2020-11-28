@@ -20,15 +20,15 @@ export const Book = ({ name, autor, year, price, image, AddItemToCart }) => {
     
     return (
         <div className={styles.container}>
-            <div className={styles.imageBlock}>
+           <div className={styles.book}>
                 <img className={styles.image} src={process.env.PUBLIC_URL + image} alt={name}></img>
+                <div className={styles.info}>
+                    <h3>{name}</h3>
+                    <h4>{autor}</h4>
+                    <p>Release year: <span>{year}</span></p>
+                </div>
             </div>
-            <div className={styles.infoBlock}>
-                <h3>{name}</h3>
-                <h4>{autor}</h4>
-                <p>Release year: <span>{year}</span></p>
-            </div>
-            <div className={styles.priceBlock}>
+            <div className={styles.price}>
                 <h5>${price}</h5>
                 <Button text="Buy" className={styles.but} onClick={handleClick}/>
             </div>

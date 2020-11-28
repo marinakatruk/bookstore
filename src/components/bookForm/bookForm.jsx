@@ -109,11 +109,6 @@ export const BookForm = (props) => {
                 break;
         }
 
-        console.log(nameValid);
-        console.log(autorValid);
-        console.log(yearValid);
-        console.log(priceValid);
-
         let newFormValid = formValid;
 
         newFormValid.formErrors = fieldValidationErrors;
@@ -126,16 +121,6 @@ export const BookForm = (props) => {
 
         setFormValid(newFormValid);
 
-        // setFormValid({formErrors: fieldValidationErrors,
-        //     nameValid: nameValid,
-        //     autorValid: autorValid,
-        //     yearValid: yearValid,
-        //     priceValid: priceValid,
-        //     imageValid: imageValid,
-        //     isValid: isValid
-        // });
-
-        console.log(formValid);
         validateForm();
     }
 

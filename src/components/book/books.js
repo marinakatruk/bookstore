@@ -1,4 +1,4 @@
-const books = [
+const reserveBooks = [
         {
                 name: 'The Element: How Finding Your Passion Changes Everything',
                 autor: 'Ken Robinson',
@@ -107,4 +107,4 @@ const books = [
 
 ];
 
-export default books;
+export default reserveBooks;

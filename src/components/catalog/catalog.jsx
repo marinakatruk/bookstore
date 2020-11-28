@@ -1,24 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Book } from '../book/book'
-import books from '../book/books'
 
 import styles from './catalog.module.scss'
 
-export const Catalog = ({ AddItemToCart }) => {
+export const Catalog = ({ data, AddItemToCart }) => {
 
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        let result;
-        const data = JSON.parse(localStorage.getItem('books'));
-        if (data && data.length > 0) {
-            result = data;
-        } else {
-            result = books;
-        }
-
-        setData(result);
-    }, []);
 
     const bookComponents = data.map(book => {
         return (
