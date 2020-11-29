@@ -5,7 +5,7 @@ import { SearchBar } from '../search/search'
 
 import styles from './header.module.scss'
 
-export const Header = ({ counter, data, term, updateData }) => {
+export const Header = ({ counter, data, term, filterData }) => {
     
     return (
         <div className={styles.header}>
@@ -14,7 +14,7 @@ export const Header = ({ counter, data, term, updateData }) => {
                     <NavLink to= '/' className={styles.link} activeClassName={styles.active} exact>Home</NavLink>
                 </li>
                 <li>
-                    <SearchBar data={data} term={term} updateData={updateData}/>
+                    <SearchBar data={data} term={term} filterData={filterData}/>
                 </li>
                 <li className={styles.menuItem}>
                     <NavLink to='/cart' className={styles.link} activeClassName={styles.active}>

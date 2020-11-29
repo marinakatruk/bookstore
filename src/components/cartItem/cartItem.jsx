@@ -18,7 +18,9 @@ export const CartItem = ({ name, autor, year, price, image, DeleteItemFromCart }
     return (
         <div className={styles.container}>
             <div className={styles.book}>
-                <img className={styles.image} src={process.env.PUBLIC_URL + image} alt={name}></img>
+                <div className={styles.imageBox}>
+                    <img className={styles.image} src={process.env.PUBLIC_URL + image} alt={name}></img>
+                </div>
                 <div className={styles.info}>
                     <h3>{name}</h3>
                     <h4>{autor}</h4>

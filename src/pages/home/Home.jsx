@@ -7,16 +7,16 @@ import styles from './home.module.scss'
 
 
 
-export const Home = ({ data, AddItemToCart, counter, term, updateData }) => {
+export const Home = ({ data, updateData, AddItemToCart, counter, term, filterData }) => {
     return (
        <div className={styles.container}>
            <Header counter={counter}
                data={data}
                term={term}
-               updateData={updateData}
+               filterData={filterData}
            />
            <div className={styles.main}>
-                <Catalog data={data} AddItemToCart={AddItemToCart}/>
+                <Catalog data={data} AddItemToCart={AddItemToCart} updateData={updateData}/>
                 <Request/>
            </div>
        </div>

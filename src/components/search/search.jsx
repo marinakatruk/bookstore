@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './search.module.scss'
 
-export const SearchBar = ({ data, term, updateData }) => {
+export const SearchBar = ({ data, term, filterData }) => {
 
     const dataSearch = (event) => {
         const value = event.target.value.toLowerCase();
@@ -10,7 +10,7 @@ export const SearchBar = ({ data, term, updateData }) => {
             return book.name.toLowerCase().includes(value);
         });
 
-        updateData({
+        filterData({
             data: filteredData,
             term: value
         });

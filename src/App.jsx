@@ -13,26 +13,37 @@ import { Footer } from './components/footer/footer.jsx'
 
 import reserveBooks from './components/book/books'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import styles from './App.module.scss'
 
 function App() {
-  // отображается в каталоге
+  // данные для отображения в каталоге
   const [data, setData] = useState([]);
-  // сюда добавляет пользователь, отправляется в storage и затем отображается
+  // книги, добавляемые пользователем
   const [books, setBooks] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [counter, setCounter] = useState(0);
   const [cartAmount, setCartAmount] = useState(0);
   const [term, setTerm] = useState('');
 
-  const initialData = reserveBooks;
 
-  const updateData = (obj) => {
+  const updateData = useCallback(
+    (array) => {
+      setData(array);
+    },
+    [],
+  );
+
+  const filterData = (obj) => {
     if (obj.term.length === 0) {
-      setData(initialData);
-      setTerm(obj.term);
+      if(books.length > 0) {
+        setData(books);
+        setTerm(obj.term);
+      } else {
+        setData(reserveBooks);
+        setTerm(obj.term);
+      }
     } else {
       setData(obj.data);
       setTerm(obj.term);
@@ -45,24 +56,16 @@ function App() {
 
   const AddItemToCart = (item) => {
     const bookPrice = + item.price;
-
     setCartItems([...cartItems, item]);
-
     setCounter(counter + 1);
-
-    setCartAmount(cartAmount + bookPrice);
-    
+    setCartAmount(cartAmount + bookPrice);  
   }
 
   const DeleteItemFromCart = (item) => {
     const bookPrice = + item.price;
     const currentItems = cartItems;
     const newItems = currentItems.filter(currentItem => {
-      if (currentItem.name !== item.name) {
-        return currentItem;
-      } else {
-        return null;
-      }
+      return currentItem.name !== item.name;
     });
     console.log(newItems);
     setCartItems(newItems);
@@ -72,19 +75,9 @@ function App() {
   }
 
   useEffect(() => {
-    let result;
-    const data = JSON.parse(localStorage.getItem('books'));
-    if (data && data.length > 0) {
-      result = data;
-    } else {
-      result = reserveBooks;
+    if (books.length >  0) {
+      localStorage.setItem('books', JSON.stringify(books));
     }
-    setData(result);
-}, []);
-
-  
-  useEffect(() => {
-    localStorage.setItem('books', JSON.stringify(books));
   });
 
 
@@ -94,12 +87,14 @@ function App() {
         <Logo/>
         <Switch>
           <Route exact path={'/'}>
-            <Home data={data}
+            <Home 
+              data={data}
+              updateData={updateData}
               AddItemToCart={AddItemToCart}
               counter={counter}
               books={books}
               term={term}
-              updateData={updateData}
+              filterData={filterData}
             />
           </Route>
           <Route path={'/cart'}>
