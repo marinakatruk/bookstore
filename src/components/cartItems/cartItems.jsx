@@ -3,7 +3,7 @@ import { CartItem } from '../cartItem/cartItem'
 
 import styles from './cartItems.module.scss'
 
-export const CartItems = ({ items, DeleteItemFromCart }) => {
+export const CartItems = ({ items, deleteItemFromCart }) => {
 
     const itemComponents = items.map(item => {
         return (
@@ -13,7 +13,7 @@ export const CartItems = ({ items, DeleteItemFromCart }) => {
             year={item.year}
             price={item.price}
             image={item.image}
-            DeleteItemFromCart={DeleteItemFromCart}
+            deleteItemFromCart={deleteItemFromCart}
             />
         )
     })

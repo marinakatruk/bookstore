@@ -13,9 +13,7 @@ export const SearchBar = ({ data, term, filterData }) => {
         filterData({
             data: filteredData,
             term: value
-        });
-
-        
+        });  
     }
 
     return (

@@ -2,7 +2,7 @@ import React from 'react'
 
 import styles from './cartItem.module.scss'
 
-export const CartItem = ({ name, autor, year, price, image, DeleteItemFromCart }) => {
+export const CartItem = ({ name, autor, year, price, image, deleteItemFromCart }) => {
 
     const handleClick = () => {
         let bookToDelete = {};
@@ -12,7 +12,7 @@ export const CartItem = ({ name, autor, year, price, image, DeleteItemFromCart }
         bookToDelete.price = price;
         bookToDelete.image = image;
 
-        DeleteItemFromCart(bookToDelete);
+        deleteItemFromCart(bookToDelete);
     }
 
     return (

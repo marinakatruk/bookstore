@@ -11,21 +11,18 @@ import { New } from './pages/newBook/New.jsx'
 import { Logo } from './components/logo/logo.jsx'
 import { Footer } from './components/footer/footer.jsx'
 
-import reserveBooks from './components/book/books'
-
 import { useState, useEffect, useCallback } from 'react'
 
 import styles from './App.module.scss'
 
 function App() {
-  // данные для отображения в каталоге
   const [data, setData] = useState([]);
-  // книги, добавляемые пользователем
-  const [books, setBooks] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [term, setTerm] = useState('');
   const [cartItems, setCartItems] = useState([]);
   const [counter, setCounter] = useState(0);
   const [cartAmount, setCartAmount] = useState(0);
-  const [term, setTerm] = useState('');
+  
 
 
   const updateData = useCallback(
@@ -36,32 +33,22 @@ function App() {
   );
 
   const filterData = (obj) => {
-    if (obj.term.length === 0) {
-      if(books.length > 0) {
-        setData(books);
-        setTerm(obj.term);
-      } else {
-        setData(reserveBooks);
-        setTerm(obj.term);
-      }
-    } else {
-      setData(obj.data);
+      setFilteredData(obj.data);
       setTerm(obj.term);
-    }
   };
 
   const handleSubmit = (book) => {
-    setBooks([...books, book]);
+    setData([...data, book]);
   };
 
-  const AddItemToCart = (item) => {
+  const addItemToCart = (item) => {
     const bookPrice = + item.price;
     setCartItems([...cartItems, item]);
     setCounter(counter + 1);
     setCartAmount(cartAmount + bookPrice);  
   }
 
-  const DeleteItemFromCart = (item) => {
+  const deleteItemFromCart = (item) => {
     const bookPrice = + item.price;
     const currentItems = cartItems;
     const newItems = currentItems.filter(currentItem => {
@@ -75,8 +62,8 @@ function App() {
   }
 
   useEffect(() => {
-    if (books.length >  0) {
-      localStorage.setItem('books', JSON.stringify(books));
+    if (data.length >  0) {
+      localStorage.setItem('books', JSON.stringify(data));
     }
   });
 
@@ -89,11 +76,11 @@ function App() {
           <Route exact path={'/'}>
             <Home 
               data={data}
-              updateData={updateData}
-              AddItemToCart={AddItemToCart}
-              counter={counter}
-              books={books}
+              filteredData={filteredData}
               term={term}
+              updateData={updateData}
+              addItemToCart={addItemToCart}
+              counter={counter}
               filterData={filterData}
             />
           </Route>
@@ -101,7 +88,7 @@ function App() {
             <Cart cartItems={cartItems}
               counter={counter}
               cartAmount={cartAmount}
-              DeleteItemFromCart={DeleteItemFromCart}
+              deleteItemFromCart={deleteItemFromCart}
             />
           </Route>
           <Route path={'/new'}><New handleSubmit={handleSubmit} counter={counter}/></Route>

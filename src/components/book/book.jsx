@@ -4,7 +4,7 @@ import { Button } from '../button/button'
 import styles from './book.module.scss'
 
 
-export const Book = ({ name, autor, year, price, image, AddItemToCart }) => {
+export const Book = ({ name, autor, year, price, image, addItemToCart }) => {
 
     const handleClick = () => {
         let item = {};
@@ -14,7 +14,7 @@ export const Book = ({ name, autor, year, price, image, AddItemToCart }) => {
         item.price = price;
         item.image = image;
 
-        AddItemToCart(item);
+        addItemToCart(item);
         
     }
     

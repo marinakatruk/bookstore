@@ -4,7 +4,7 @@ import reserveBooks from '../book/books'
 
 import styles from './catalog.module.scss'
 
-export const Catalog = ({ data, updateData, AddItemToCart }) => {
+export const Catalog = ({ data, filteredData, term, updateData, addItemToCart }) => {
 
     useEffect(() => {
         let result;
@@ -18,19 +18,34 @@ export const Catalog = ({ data, updateData, AddItemToCart }) => {
     }, [updateData]);
 
 
-    const bookComponents = data.map(book => {
-        return (
-            <Book key={book.name}
-                name={book.name}
-                autor={book.autor}
-                year={book.year}
-                price={book.price}
-                image={book.image}
-                AddItemToCart={AddItemToCart}
-            />          
-        )
-    })
-
+    let bookComponents;
+    if (term === '') {
+        bookComponents = data.map(book => {
+            return (
+                <Book key={book.name}
+                    name={book.name}
+                    autor={book.autor}
+                    year={book.year}
+                    price={book.price}
+                    image={book.image}
+                    addItemToCart={addItemToCart}
+                />          
+            )
+        })
+    } else {
+        bookComponents = filteredData.map(book => {
+            return (
+                <Book key={book.name}
+                    name={book.name}
+                    autor={book.autor}
+                    year={book.year}
+                    price={book.price}
+                    image={book.image}
+                    addItemToCart={addItemToCart}
+                />          
+            )
+        })
+    }
 
     return (
         <div className={styles.catalog}>
