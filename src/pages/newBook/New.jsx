@@ -4,13 +4,13 @@ import { BookForm } from '../../components/bookForm/bookForm'
 
 import styles from './new.module.scss'
 
-export const New = ({ handleSubmit, counter }) => {
+export const New = () => {
     return (
         <div className={styles.container}>
-            <Header counter={counter}/>
+            <Header />
             <div className={styles.main}>
                 <h2>Enter the data</h2>
-                <BookForm handleSubmit={handleSubmit}/>
+                <BookForm />
             </div>
         </div>
     )

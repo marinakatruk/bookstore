@@ -1,10 +1,21 @@
 import React, { useEffect } from 'react'
 import { Book } from '../book/book'
 import reserveBooks from '../book/books'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateData } from '../../store/actions'
 
 import styles from './catalog.module.scss'
 
-export const Catalog = ({ data, filteredData, term, updateData, addItemToCart }) => {
+export const Catalog = ({ filteredData, term }) => {
+
+    const data = useSelector(state => state.data);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (data.length >  0) {
+          localStorage.setItem('books', JSON.stringify(data));
+        }
+    });
 
     useEffect(() => {
         let result;
@@ -14,8 +25,8 @@ export const Catalog = ({ data, filteredData, term, updateData, addItemToCart })
         } else {
           result = reserveBooks;
         }
-        updateData(result);
-    }, [updateData]);
+        dispatch(updateData(result));
+    }, [dispatch]);
 
 
     let bookComponents;
@@ -28,7 +39,6 @@ export const Catalog = ({ data, filteredData, term, updateData, addItemToCart })
                     year={book.year}
                     price={book.price}
                     image={book.image}
-                    addItemToCart={addItemToCart}
                 />          
             )
         })
@@ -41,7 +51,6 @@ export const Catalog = ({ data, filteredData, term, updateData, addItemToCart })
                     year={book.year}
                     price={book.price}
                     image={book.image}
-                    addItemToCart={addItemToCart}
                 />          
             )
         })

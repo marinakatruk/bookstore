@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import { Header } from '../../components/header/header.jsx'
 import { Catalog } from '../../components/catalog/catalog'
 import { Request } from '../../components/addRequest/addRequest'
@@ -7,21 +8,23 @@ import styles from './home.module.scss'
 
 
 
-export const Home = ({ data, filteredData, updateData, addItemToCart, counter, term, filterData }) => {
+export const Home = () => {
+    
+    const [filteredData, setFilteredData] = useState([]);
+    const [term, setTerm] = useState('');
+
+    const filterData = (obj) => {
+        setFilteredData(obj.data);
+        setTerm(obj.term);
+    };
+
+
     return (
        <div className={styles.container}>
-           <Header counter={counter}
-               data={data}
-               term={term}
-               filterData={filterData}
-           />
+           <Header term={term} filterData={filterData} />
            <div className={styles.main}>
-                <Catalog data={data}
-                    filteredData={filteredData}
-                    term={term}
-                    addItemToCart={addItemToCart}
-                    updateData={updateData}/>
-                <Request/>
+                <Catalog filteredData={filteredData} term={term} />
+                <Request />
            </div>
        </div>
     )

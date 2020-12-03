@@ -1,19 +1,22 @@
 import React from 'react'
 import { CartItem } from '../cartItem/cartItem'
+import { useSelector } from 'react-redux'
 
 import styles from './cartItems.module.scss'
 
-export const CartItems = ({ items, deleteItemFromCart }) => {
+export const CartItems = () => {
 
-    const itemComponents = items.map(item => {
+    const items = useSelector(state => state.cartItems);
+
+    const itemComponents = items.map((item, index) => {
         return (
-            <CartItem key={item.name}
+            <CartItem key={index.toString() + item.name}
+            id={item.id}
             name={item.name}
             autor={item.autor}
             year={item.year}
             price={item.price}
             image={item.image}
-            deleteItemFromCart={deleteItemFromCart}
             />
         )
     })

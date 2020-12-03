@@ -1,8 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import styles from './search.module.scss'
 
-export const SearchBar = ({ data, term, filterData }) => {
+export const SearchBar = ({ term, filterData }) => {
+
+    const data = useSelector(state => state.data)
 
     const dataSearch = (event) => {
         const value = event.target.value.toLowerCase();

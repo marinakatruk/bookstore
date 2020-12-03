@@ -1,18 +1,23 @@
 import React from 'react'
+import { deleteItem, decrement, decreaseCartAmount } from '../../store/actions'
+import { useDispatch } from 'react-redux'
 
 import styles from './cartItem.module.scss'
 
-export const CartItem = ({ name, autor, year, price, image, deleteItemFromCart }) => {
+export const CartItem = ({ id, name, autor, year, price, image }) => {
 
-    const handleClick = () => {
-        let bookToDelete = {};
-        bookToDelete.name = name;
-        bookToDelete.autor = autor;
-        bookToDelete.year = year;
-        bookToDelete.price = price;
-        bookToDelete.image = image;
+    const dispatch = useDispatch();
 
-        deleteItemFromCart(bookToDelete);
+    const handleClick = (event) => {
+        const bookId = event.target.id;
+        console.log(event.target.value);
+        const bookPrice = Number(event.target.value);
+        console.log(bookId);
+        console.log(bookPrice);
+
+        dispatch(deleteItem(bookId));
+        dispatch(decrement());
+        dispatch(decreaseCartAmount(bookPrice));
     }
 
     return (
@@ -32,7 +37,14 @@ export const CartItem = ({ name, autor, year, price, image, deleteItemFromCart }
                 <span>1</span>
             </div>
             <div className={styles.deleteBlock}>
-                <button type='button' className={styles.button} onClick={handleClick}>X</button>
+                <button type='button'
+                    className={styles.button}
+                    onClick={handleClick}
+                    id={id}
+                    value={price}
+                >
+                    X
+                </button>
             </div>
         </div>
     )

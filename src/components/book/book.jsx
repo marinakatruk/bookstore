@@ -1,10 +1,14 @@
 import React from 'react'
 import { Button } from '../button/button'
+import { addItem, increment, increaseCartAmount } from '../../store/actions'
+import { useDispatch } from 'react-redux'
 
 import styles from './book.module.scss'
 
 
-export const Book = ({ name, autor, year, price, image, addItemToCart }) => {
+export const Book = ({ name, autor, year, price, image }) => {
+
+    const dispatch = useDispatch();
 
     const handleClick = () => {
         let item = {};
@@ -13,8 +17,11 @@ export const Book = ({ name, autor, year, price, image, addItemToCart }) => {
         item.year = year;
         item.price = price;
         item.image = image;
+        item.id = Math.floor(Math.random() * 10000).toString() + name;
 
-        addItemToCart(item);
+        dispatch(addItem(item));
+        dispatch(increment());
+        dispatch(increaseCartAmount(Number(price)));
         
     }
     

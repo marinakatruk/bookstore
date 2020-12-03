@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import { FormErrors } from '../../components/formErrors/formErrors'
+import { addData } from '../../store/actions'
+import { useDispatch } from 'react-redux'
 
 import styles from './bookForm.module.scss'
 
-export const BookForm = (props) => {
+export const BookForm = () => {
 
     const [book, setBook] = useState({
         name: '',
@@ -147,8 +149,10 @@ export const BookForm = (props) => {
         
     }
 
+    const dispatch = useDispatch();
+
     const submitForm = () => {
-        props.handleSubmit(book);
+        dispatch(addData(book));
         setBook({
             name: '',
             autor: '',

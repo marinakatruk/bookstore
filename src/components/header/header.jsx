@@ -1,11 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { SearchBar } from '../search/search'
+import { useSelector } from 'react-redux'
 
 
 import styles from './header.module.scss'
 
-export const Header = ({ counter, data, term, filterData }) => {
+export const Header = ({ data, term, filterData }) => {
+
+    const counter = useSelector(state => state.counter)
     
     return (
         <div className={styles.header}>
