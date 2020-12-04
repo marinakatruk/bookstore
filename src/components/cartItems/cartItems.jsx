@@ -1,8 +1,8 @@
 import React from 'react'
-import { CartItem } from '../cartItem/cartItem'
+import { CartItem } from '../CartItem/CartItem'
 import { useSelector } from 'react-redux'
 
-import styles from './cartItems.module.scss'
+import styles from './CartItems.module.scss'
 
 export const CartItems = () => {
 

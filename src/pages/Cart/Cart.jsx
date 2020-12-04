@@ -1,9 +1,9 @@
 import React from 'react'
-import { Header } from '../../components/header/header'
-import { CartItems } from '../../components/cartItems/cartItems'
+import { Header } from '../../components/Header/Header'
+import { CartItems } from '../../components/CartItems/CartItems'
 import { useSelector } from 'react-redux'
 
-import styles from './cart.module.scss'
+import styles from './Cart.module.scss'
 
 export const Cart = () => {
 
@@ -14,7 +14,7 @@ export const Cart = () => {
     
     return (
         <div className={styles.container}>
-            <Header/>
+            <Header isCart={true}/>
             <div className={styles.main}>
                 <h2 className={styles.title}>Your cart</h2>
                 {cartItems.length > 0 ? <CartItems />

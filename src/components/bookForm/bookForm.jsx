@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import { FormErrors } from '../../components/formErrors/formErrors'
+import { FormErrors } from '../FormErrors/FormErrors'
 import { addData } from '../../store/actions'
 import { useDispatch } from 'react-redux'
 
-import styles from './bookForm.module.scss'
+import styles from './BookForm.module.scss'
 
 export const BookForm = () => {
 
@@ -27,6 +27,7 @@ export const BookForm = () => {
     });
 
     const [fileStatus, setFileStatus] = useState('Select file...');
+    const [filePreview, setFilePreview] = useState('');
 
     const handleChange = (event) => {
         let newBook;
@@ -48,6 +49,7 @@ export const BookForm = () => {
                     const result = reader.result;
                     newBook = Object.assign({}, book);
                     newBook.image = result;
+                    setFilePreview(result);
                     setBook(newBook);
                     setFileStatus(imageFile.name);
                 }
@@ -161,11 +163,12 @@ export const BookForm = () => {
             image: ''
         })
         setFileStatus('Select file...');
+        setFilePreview('');
     };
 
     const { formErrors, isValid } = formValid;
 
-    const { container, item, input, submit, errors, fileInput, fileField } = styles;
+    const { container, item, input, submit, errors, fileInput, fileField, imageBox, preview } = styles;
 
     return (
 
@@ -236,6 +239,11 @@ export const BookForm = () => {
                 />
                 <div className={fileField}>{fileStatus}</div>
             </label>
+            {filePreview !== '' ?
+            <div className={imageBox}>
+                <img className={preview} src={filePreview} alt={fileStatus}></img>
+            </div>
+            : ''}
             <input className={submit} type="button" disabled={!isValid} value="Create a book" onClick={submitForm}/>
         </form>
     )

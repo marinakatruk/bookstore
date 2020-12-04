@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import styles from './addRequest.module.scss'
+import styles from './AddRequest.module.scss'
 import image from './pen2.png'
 
 export const Request = () => {

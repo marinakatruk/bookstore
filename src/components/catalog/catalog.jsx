@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { Book } from '../book/book'
-import reserveBooks from '../book/books'
+import { Book } from '../Book/Book'
+import reserveBooks from '../Book/books'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateData } from '../../store/actions'
 
-import styles from './catalog.module.scss'
+import styles from './Catalog.module.scss'
 
 export const Catalog = ({ filteredData, term }) => {
 

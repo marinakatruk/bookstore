@@ -71,7 +71,7 @@
 
 
 .submit {
-    margin-top: 50px;
+    margin-top: 130px;
     background-color: #333333;
     color: #ffffff;
     border-radius: 5px;
@@ -95,4 +95,16 @@
 .submit:disabled {
     background-color: #C0C0C0;
     color: #808080;
+}
+
+.imageBox {
+    margin-top: 20px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+}
+
+.preview {
+    height: 100px;
+    
 }

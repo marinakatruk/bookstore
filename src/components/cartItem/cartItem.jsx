@@ -2,7 +2,7 @@ import React from 'react'
 import { deleteItem, decrement, decreaseCartAmount } from '../../store/actions'
 import { useDispatch } from 'react-redux'
 
-import styles from './cartItem.module.scss'
+import styles from './CartItem.module.scss'
 
 export const CartItem = ({ id, name, autor, year, price, image }) => {
 

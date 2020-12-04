@@ -1,9 +1,9 @@
 import React from 'react'
-import { Button } from '../button/button'
+import { Button } from '../Button/Button'
 import { addItem, increment, increaseCartAmount } from '../../store/actions'
 import { useDispatch } from 'react-redux'
 
-import styles from './book.module.scss'
+import styles from './Book.module.scss'
 
 
 export const Book = ({ name, autor, year, price, image }) => {

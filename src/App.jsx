@@ -4,12 +4,12 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import { Home } from './pages/home/Home.jsx'
+import { Shop } from './pages/Shop/Shop.jsx'
 import { Cart } from './pages/Cart/Cart'
-import { New } from './pages/newBook/New.jsx'
+import { New } from './pages/NewBook/New.jsx'
 
-import { Logo } from './components/logo/logo.jsx'
-import { Footer } from './components/footer/footer.jsx'
+import { Logo } from './components/Logo/Logo.jsx'
+import { Footer } from './components/Footer/Footer.jsx'
 
 import styles from './App.module.scss'
 
@@ -21,7 +21,7 @@ function App() {
         <Logo/>
         <Switch>
           <Route exact path={'/'}>
-            <Home />
+            <Shop />
           </Route>
           <Route path={'/cart'}>
             <Cart />

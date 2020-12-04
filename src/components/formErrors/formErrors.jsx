@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './formErrors.module.scss'
+import styles from './FormErrors.module.scss'
 
 export const FormErrors = ({ formErrors }) => {
 

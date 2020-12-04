@@ -15,6 +15,11 @@
 
 }
 
+.button:active,
+.button:focus {
+    outline: none;
+}
+
 .button:hover {
     background-color: #eeeeee;  
     color: #333333;

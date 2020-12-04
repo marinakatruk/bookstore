@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import styles from './search.module.scss'
+import styles from './Search.module.scss'
 
 export const SearchBar = ({ term, filterData }) => {
 
