@@ -7,7 +7,16 @@ export const Footer = () => {
     return (
         <div className={styles.footer}>
             <div className={styles.container}>
-                <p className={styles.text}>Contact us <span>support@bookstore.com</span></p>
+                <p className={styles.text}>
+                    Contact us 
+                    <a className={styles.email} 
+                        href="mailto:support@bookstore.com"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <span>support@bookstore.com</span>
+                    </a>
+                </p>
                 <ul className={styles.socialList}>
                     <li className={styles.socialItem}>
                         <a href="https://twitter.com/jk_rowling" target="_blank" rel="noreferrer">

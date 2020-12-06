@@ -21,11 +21,16 @@
         weight: 700;
         size: 16px;
     }
+}
+
+.email {
+    text-decoration: none;
     span {
         color: #666666;
     }
     margin: 0;
     margin-top: 30px;
+    padding-left: 5px;
 }
 
 .socialList {
