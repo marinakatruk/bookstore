@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter,
   Switch,
   Route,
 } from "react-router-dom";
@@ -16,7 +16,7 @@ import styles from './App.module.scss'
 function App() {
 
   return (
-    <Router>
+    <HashRouter basename="/">
       <div className={styles.container}>
         <Logo/>
         <Switch>
@@ -32,7 +32,7 @@ function App() {
         </Switch>
         <Footer/>
       </div>
-    </Router>
+    </HashRouter>
   );
 }
 

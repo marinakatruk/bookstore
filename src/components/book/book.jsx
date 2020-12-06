@@ -28,7 +28,7 @@ export const Book = ({ name, autor, year, price, image }) => {
     return (
         <div className={styles.container}>
            <div className={styles.book}>
-                <img className={styles.image} src={process.env.PUBLIC_URL + image} alt={name}></img>
+                <img className={styles.image} src={image} alt={name}></img>
                 <div className={styles.info}>
                     <h3>{name}</h3>
                     <h4>{autor}</h4>
@@ -43,3 +43,5 @@ export const Book = ({ name, autor, year, price, image }) => {
         </div>
     )
 }
+
+// process.env.PUBLIC_URL + 
