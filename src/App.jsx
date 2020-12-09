@@ -5,8 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import { Shop } from './pages/Shop/Shop.jsx'
-import { Cart } from './pages/Cart111/Cart111'
-import { New } from './pages/NewBook111/New111.jsx'
+import { Cart } from './pages/Cart/Cart'
+import { BookCreator } from './pages/BookCreator/BookCreator.jsx'
 
 import { Logo } from './components/Logo/Logo.jsx'
 import { Footer } from './components/Footer/Footer.jsx'
@@ -27,7 +27,7 @@ function App() {
             <Cart />
           </Route>
           <Route path={'/new'}>
-            <New />
+            <BookCreator />
           </Route>
         </Switch>
         <Footer/>

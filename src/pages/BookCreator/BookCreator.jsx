@@ -2,9 +2,9 @@ import React from 'react'
 import { Header } from '../../components/Header/Header'
 import { BookForm } from '../../components/BookForm/BookForm'
 
-import styles from './New.module.scss'
+import styles from './BookCreator.module.scss'
 
-export const New = () => {
+export const BookCreator = () => {
     return (
         <div className={styles.container}>
             <Header isMainPage={false}/>
