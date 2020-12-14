@@ -10,10 +10,10 @@ export const decrement = () => {
     };
 };
 
-export const addData = (data) => {
+export const addData = (book) => {
     return {
         type: 'ADD_DATA',
-        payload: data
+        payload: book
     };
 }
 

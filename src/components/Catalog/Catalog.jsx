@@ -11,23 +11,13 @@ export const Catalog = ({ filteredData, term }) => {
     const data = useSelector(state => state.data);
     const dispatch = useDispatch();
 
+
     useEffect(() => {
-        if (data.length >  0) {
-          localStorage.setItem('books', JSON.stringify(data));
+        if (data.length === 0) {
+            const currentBooks = reserveBooks;
+            dispatch(updateData(currentBooks));
         }
     });
-
-    useEffect(() => {
-        let result;
-        const storedData = JSON.parse(localStorage.getItem('books'));
-        if (storedData) {
-          result = storedData;
-        } else {
-          result = reserveBooks;
-        }
-        dispatch(updateData(result));
-    }, [dispatch]);
-
 
     let bookComponents;
     if (term === '') {

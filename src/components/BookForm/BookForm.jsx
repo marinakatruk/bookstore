@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { FormErrors } from '../FormErrors/FormErrors'
 import { addData } from '../../store/actions'
 import { useDispatch } from 'react-redux'
-
 import styles from './BookForm.module.scss'
+import { NavLink } from 'react-router-dom'
 
 export const BookForm = () => {
 
@@ -244,7 +244,9 @@ export const BookForm = () => {
                 <img className={preview} src={filePreview} alt={fileStatus}></img>
             </div>
             : ''}
-            <input className={submit} type="button" disabled={!isValid} value="Create a book" onClick={submitForm}/>
+            <NavLink to="/">
+                <input className={submit} type="button" disabled={!isValid} value="Create a book" onClick={submitForm}/>
+            </NavLink>
         </form>
     )
 }

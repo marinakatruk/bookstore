@@ -4,14 +4,17 @@ import { Header } from '../../components/Header/Header.jsx'
 import { Catalog } from '../../components/Catalog/Catalog'
 import { Request } from '../../components/AddRequest/AddRequest'
 
+
 import styles from './Shop.module.scss'
 
 
 
 export const Shop = () => {
+
     
     const [filteredData, setFilteredData] = useState([]);
     const [term, setTerm] = useState('');
+
 
     const filterData = (obj) => {
         setFilteredData(obj.data);
